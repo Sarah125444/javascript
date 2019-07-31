@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //将根结点在数组rootPos位置的一颗由数组表达的二叉树转换为一颗由二叉链表表达的树
+    function ary2tree(ary, rootPos = 0) {
+      if (ary[rootPos] == null) {
+        return null;
+      }
+      var left = ary2tree(ary, rootPos * 2 + 1)
+      var right = ary2tree(ary, rootPos * 2 + 2)
+
+      var root = {
+        val: ary[rootPos],
+        left: left,
+        right: right,
+      }
+
+      return root;
+    }
+
+    //将由二叉链表表达的树放回数组 根结点放在pos位置
+    function tree2ary(root,pos = 0,result = []) {
+        if (root) {
+          result[pos] = root.val;
+          tree2ary(root.left, pos * 2 + 1 , result);
+          tree2ary(root.right, pos * 2 + 2 , result);
+        }
+       
+        return result; 
+    }
+    tree2ary(root);
+
+    function lcary2tree(ary){
+      if(ary.length == 0){
+        return null;
+      }
+      var root = {
+        val: ary[0],
+        left : null,
+        right: null,
+      }
+      var nodes = [root];
+      for(var i = 0; i < ary.length ;i++){
+        var curr = nodes.shift();
+          var node = {
+            val: ary[i],
+            left: null,
+            right:null,
+          }
+          nodes.push(node);
+      }
+    }
+  </script>
+</body>
+
+</html>
